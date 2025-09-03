@@ -24,34 +24,7 @@
             <button type="submit">Iniciar Sesión</button>
         </form>
     </main>
-    <script>
-    document.querySelector('form').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const data = {
-            email: document.getElementById('email').value,
-            password: document.getElementById('password').value
-        };
-        try {
-            const res = await fetch('http://localhost:3000/api/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-            if (res.ok) {
-                const user = await res.json();
-                // Guardar usuario en localStorage
-                localStorage.setItem('usuario', JSON.stringify(user.user));
-                alert('¡Bienvenido, ' + user.user.nombre + '!');
-                window.location.href = 'index.html';
-            } else {
-                const err = await res.json();
-                alert('Error: ' + (err.error || 'No se pudo iniciar sesión.'));
-            }
-        } catch (error) {
-            alert('Error de conexión con el servidor.');
-        }
-    });
-    </script>
+    <script src="script.js"></script>
     <footer>
         <p>&copy; 2023 TP1 - HTML Y CSS basico. Todos los derechos reservados.</p>
     </footer>

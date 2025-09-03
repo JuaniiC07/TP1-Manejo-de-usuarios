@@ -21,19 +21,4 @@
     <footer>
         <p>&copy; 2023 TP1 - HTML Y CSS basico. Todos los derechos reservados.</p>
     </footer>
-    <script>
-    // Mostrar nombre de usuario y botón de cerrar sesión si está logueado
-    const usuario = JSON.parse(localStorage.getItem('usuario'));
-    const menu = document.getElementById('menu-usuario');
-        if (usuario && usuario.nombre) {
-            menu.innerHTML = `
-                <li>Hola, <strong>${usuario.nombre}</strong></li>
-                <li><a href="perfil.html">Mi Perfil</a></li>
-                <li><button id="cerrarSesion">Cerrar sesión</button></li>
-            `;
-            document.getElementById('cerrarSesion').onclick = function() {
-                localStorage.removeItem('usuario');
-                window.location.reload();
-            };
-        }
-    </script>
+    <script src="script.js"></script>
