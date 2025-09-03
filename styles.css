@@ -10,7 +10,23 @@ header {
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     padding: 1rem 0;
 }
+header nav {
+    display: flex;
+    align-items: center;
+}
+header .logo-header-link {
+    margin-right: 2rem;
+    display: flex;
+    align-items: center;
+}
+header .logo-header-img {
+    height: 48px;
+    width: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
 header nav ul {
+    flex: 1;
     justify-content: flex-end;
 }
 header nav a {
@@ -27,14 +43,14 @@ header nav a:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 30vh;
+    min-height: 15vh;
     margin-top: 2rem;
 }
 .logo-container img {
     display: block;
-    max-width: 100%;
+    max-width: 50%;
     height: auto;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    box-shadow: 0 4px 24px rgba(255, 255, 255, 0.1);
     border-radius: 16px;
 }
 footer {
