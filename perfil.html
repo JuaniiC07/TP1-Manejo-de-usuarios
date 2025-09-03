@@ -73,26 +73,95 @@
     <main>
         <div class="perfil-box" id="perfilBox">
             <h2>Mi Perfil</h2>
-            <p>Cargando datos...</p>
+            <form id="formPerfil" style="display:none; flex-direction:column; gap:1rem;">
+                <label>Nombre
+                    <input type="text" id="nombre" name="nombre" required>
+                </label>
+                <label>Apellido
+                    <input type="text" id="apellido" name="apellido" required>
+                </label>
+                <label>Edad
+                    <input type="number" id="edad" name="edad" min="0" required>
+                </label>
+                <label>Fecha de nacimiento
+                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+                </label>
+                <label>Email
+                    <input type="email" id="email" name="email" required readonly>
+                </label>
+                <label>Contraseña
+                    <input type="password" id="password" name="password" required>
+                </label>
+                <button type="submit" class="logout-btn" style="margin-top:0;">Guardar cambios</button>
+            </form>
+            <div id="datosPerfil"></div>
+            <button class="logout-btn" id="editarBtn">Editar perfil</button>
         </div>
     </main>
     <script>
-    // Mostrar datos del usuario
+    // Mostrar y editar datos del usuario
     const usuario = JSON.parse(localStorage.getItem('usuario'));
     const box = document.getElementById('perfilBox');
-    if (usuario) {
-        box.innerHTML = `
-            <h2>Mi Perfil</h2>
-            <p><strong>Nombre:</strong> ${usuario.nombre}</p>
-            <p><strong>Apellido:</strong> ${usuario.apellido}</p>
-            <p><strong>Edad:</strong> ${usuario.edad}</p>
-            <p><strong>Fecha de nacimiento:</strong> ${usuario.fecha_nacimiento}</p>
-            <p><strong>Email:</strong> ${usuario.email}</p>
-            <button class="logout-btn" onclick="logout()">Cerrar sesión</button>
-        `;
-    } else {
-        box.innerHTML = '<h2>Mi Perfil</h2><p>No has iniciado sesión.</p>';
+    const datosDiv = document.getElementById('datosPerfil');
+    const form = document.getElementById('formPerfil');
+    const editarBtn = document.getElementById('editarBtn');
+    function mostrarDatos() {
+        if (usuario) {
+            datosDiv.innerHTML = `
+                <p><strong>Nombre:</strong> ${usuario.nombre}</p>
+                <p><strong>Apellido:</strong> ${usuario.apellido}</p>
+                <p><strong>Edad:</strong> ${usuario.edad}</p>
+                <p><strong>Fecha de nacimiento:</strong> ${usuario.fecha_nacimiento}</p>
+                <p><strong>Email:</strong> ${usuario.email}</p>
+            `;
+            form.style.display = 'none';
+            editarBtn.style.display = '';
+        } else {
+            datosDiv.innerHTML = '<p>No has iniciado sesión.</p>';
+            editarBtn.style.display = 'none';
+        }
     }
+    function cargarFormulario() {
+        if (!usuario) return;
+        form.nombre.value = usuario.nombre;
+        form.apellido.value = usuario.apellido;
+        form.edad.value = usuario.edad;
+        form.fecha_nacimiento.value = usuario.fecha_nacimiento;
+        form.email.value = usuario.email;
+        form.password.value = usuario.password;
+        form.style.display = 'flex';
+        editarBtn.style.display = 'none';
+    }
+    editarBtn.onclick = cargarFormulario;
+    form.onsubmit = async function(e) {
+        e.preventDefault();
+        const datos = {
+            nombre: form.nombre.value,
+            apellido: form.apellido.value,
+            edad: form.edad.value,
+            fecha_nacimiento: form.fecha_nacimiento.value,
+            email: form.email.value,
+            password: form.password.value
+        };
+        try {
+            const res = await fetch('http://localhost:3000/api/actualizar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(datos)
+            });
+            if (res.ok) {
+                localStorage.setItem('usuario', JSON.stringify(datos));
+                alert('Datos actualizados correctamente.');
+                mostrarDatos();
+            } else {
+                const err = await res.json();
+                alert('Error al actualizar los datos: ' + (err.error || '')); 
+            }
+        } catch {
+            alert('Error de conexión con el servidor.');
+        }
+    };
+    mostrarDatos();
     function logout() {
         localStorage.removeItem('usuario');
         window.location.href = 'index.html';
