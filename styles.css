@@ -1,0 +1,139 @@
+/* Estilos generales */
+body {
+    background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+}
+header {
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: 1rem 0;
+}
+header nav ul {
+    justify-content: flex-end;
+}
+header nav a {
+    text-decoration: none;
+    color: #f76b1c;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+header nav a:hover {
+    color: #b84e0d;
+}
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 30vh;
+    margin-top: 2rem;
+}
+.logo-container img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    border-radius: 16px;
+}
+footer {
+    background: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+}
+footer p {
+    color: #f76b1c;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Estilos para main y forms */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+}
+form {
+    background: #fff;
+    padding: 2rem 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 280px;
+}
+label {
+    font-weight: 500;
+    color: #f76b1c;
+}
+input[type="text"], input[type="number"], input[type="date"], input[type="email"], input[type="password"] {
+    padding: 0.7rem 1rem;
+    border: 1px solid #f6d365;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.2s;
+}
+input:focus {
+    border: 1.5px solid #f76b1c;
+}
+button[type="submit"], .logout-btn, #cerrarSesion {
+    background: linear-gradient(90deg, #f6d365 0%, #fda085 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: background 0.2s;
+}
+button[type="submit"]:hover, .logout-btn:hover, #cerrarSesion:hover {
+    background: linear-gradient(90deg, #fda085 0%, #f6d365 100%);
+}
+
+/* Estilos para listas de menú */
+ul, #menu-usuario {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+    justify-content: flex-end;
+}
+
+/* Estilos específicos de perfil */
+.perfil-box {
+    background: #fff;
+    padding: 2rem 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    min-width: 280px;
+}
+.perfil-box h2 {
+    color: #f76b1c;
+    margin-top: 0;
+}
+.perfil-box p {
+    margin: 0.5rem 0;
+}
+.logout-btn {
+    margin-top: 1rem;
+}
+#formPerfil {
+    flex-direction: column;
+    gap: 1rem;
+}
+#formPerfil[style*="display:none"] {
+    display: none !important;
+}
+#formPerfil[style*="display:flex"] {
+    display: flex !important;
+}
