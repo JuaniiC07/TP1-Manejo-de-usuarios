@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP1 - HTML Y CSS basico</title>
+    <style>
+        body {
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+        }
+        header {
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 1rem 0;
+        }
+        header nav ul {
+            justify-content: flex-end;
+        }
+        header nav a {
+            text-decoration: none;
+            color: #f76b1c;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+        header nav a:hover {
+            color: #b84e0d;
+        }
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 30vh;
+            margin-top: 2rem;
+        }
+        .logo-container img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+            border-radius: 16px;
+        }
+        footer {
+            background: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+        }
+        footer p {
+            color: #f76b1c;
+            margin: 0;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul id="menu-usuario" style="list-style: none; display: flex; gap: 1rem; padding: 0; margin: 0; justify-content: flex-end;">
+                <li><a href="inicio-sesion.html">Iniciar Sesión</a></li>
+                <li><a href="registro.html">Registrarse</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="logo-container">
+        <img src="Logo.png" alt="Logo">
+    </div>
+    <footer>
+        <p>&copy; 2023 TP1 - HTML Y CSS basico. Todos los derechos reservados.</p>
+    </footer>
+    <script>
+    // Mostrar nombre de usuario y botón de cerrar sesión si está logueado
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+    const menu = document.getElementById('menu-usuario');
+        if (usuario && usuario.nombre) {
+            menu.innerHTML = `
+                <li>Hola, <strong>${usuario.nombre}</strong></li>
+                <li><a href="perfil.html">Mi Perfil</a></li>
+                <li><button id="cerrarSesion" style="background: #f76b1c; color: #fff; border: none; border-radius: 8px; padding: 0.5rem 1rem; font-weight: bold; cursor: pointer;">Cerrar sesión</button></li>
+            `;
+            document.getElementById('cerrarSesion').onclick = function() {
+                localStorage.removeItem('usuario');
+                window.location.reload();
+            };
+        }
+    </script>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil</title>
+    <style>
+        body {
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+        }
+        header {
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 1rem 0;
+        }
+        header nav ul {
+            justify-content: flex-end;
+        }
+        header nav a {
+            text-decoration: none;
+            color: #f76b1c;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+        header nav a:hover {
+            color: #b84e0d;
+        }
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+        }
+        .perfil-box {
+            background: #fff;
+            padding: 2rem 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+            min-width: 280px;
+        }
+        .perfil-box h2 {
+            color: #f76b1c;
+            margin-top: 0;
+        }
+        .perfil-box p {
+            margin: 0.5rem 0;
+        }
+        .logout-btn {
+            background: #f76b1c;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul style="list-style: none; display: flex; gap: 1rem; padding: 0; margin: 0; justify-content: flex-end;">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="#" id="logout">Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="perfil-box" id="perfilBox">
+            <h2>Mi Perfil</h2>
+            <p>Cargando datos...</p>
+        </div>
+    </main>
+    <script>
+    // Mostrar datos del usuario
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+    const box = document.getElementById('perfilBox');
+    if (usuario) {
+        box.innerHTML = `
+            <h2>Mi Perfil</h2>
+            <p><strong>Nombre:</strong> ${usuario.nombre}</p>
+            <p><strong>Apellido:</strong> ${usuario.apellido}</p>
+            <p><strong>Edad:</strong> ${usuario.edad}</p>
+            <p><strong>Fecha de nacimiento:</strong> ${usuario.fecha_nacimiento}</p>
+            <p><strong>Email:</strong> ${usuario.email}</p>
+            <button class="logout-btn" onclick="logout()">Cerrar sesión</button>
+        `;
+    } else {
+        box.innerHTML = '<h2>Mi Perfil</h2><p>No has iniciado sesión.</p>';
+    }
+    function logout() {
+        localStorage.removeItem('usuario');
+        window.location.href = 'index.html';
+    }
+    document.getElementById('logout').onclick = logout;
+    </script>
+</body>
+</html>
